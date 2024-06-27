@@ -62,7 +62,13 @@ To replicate our results, you only need UT Austin Egocentric Data consisting of 
 
 <br>
 
-# III. Model Training
+# III. Directory Organization
+
+
+<br>
+
+
+# IV. Model Training
 
 ### Step 1.
 Enter the project directory and make sure that your virtual environment is active.
@@ -85,3 +91,4 @@ Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You
 
 <img src="./media/sh_ss.png"></img>
 
+<b> Note To Self: </b> Test this repo on different servers!
