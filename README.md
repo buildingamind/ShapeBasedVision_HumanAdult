@@ -1,7 +1,13 @@
-# Setup
+# Environment Setup
 
 ### Step 1: Check python version. 
-Your python version should be 3.11.5 or greater to successfully install all the required libraries.
+Your python version should be 3.11.5 or greater to successfully install all the required libraries. If don't have access to python==3.11.5 or greater, then create a conda environment as shown in the next step. 
+<br><br>
+To check your python version - 
+
+```python
+python3 --version
+```
 
 ### Step 2: Creating a virtual Environment.
 You need a virtual environment to install all the libraries required to run our models. A virutal environment can be created either using 'conda' or 'venv'. If you system has an older version of python then use conda otherwise use venv.
@@ -33,3 +39,14 @@ conda activate myenv
 source myenv/bin/activate
 ```
 
+### Step 4: Installing libraries.
+A requirement.txt file is present with this repo which has a list of all the required libraries. Install it using - 
+
+```python3
+pip3 install -r requirements.txt
+```
+
+<b>Note:</b> If any of the libraries fail to install, then recheck your python version as shown in step 1.
+
+
+# Dataset Setup
