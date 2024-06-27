@@ -79,3 +79,9 @@ python3 train_ViTCoT.py --help
 
 ### Step 3.
 
+Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You can change the number of GPUs, temporal window size, architecture size, experiment name, shuffling and many other arguments in this file before training the model.
+
+<b>Example - </b>
+
+<img src="./media/sh_ss.png"></img>
+
