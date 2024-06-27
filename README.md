@@ -48,5 +48,34 @@ pip3 install -r requirements.txt
 
 <b>Note:</b> If any of the libraries fail to install, then recheck your python version as shown in step 1.
 
+<br>
 
 # Dataset Setup
+
+### Step 1: Downloading dataset.
+To replicate our results, you only need UT Austin Egocentric Data consisting of three video datasets. Each video dataset consists of 80,000 samples of 64x64 resolution images. Download the dataset from the link provided below - 
+<br>
+<br>
+<a href="www.google.com">Dataset</a>
+
+<b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
+
+<br>
+
+# Model Training
+
+### Step 1.
+Enter the project directory and make sure that your virtual environment is active.
+
+### Step 2.
+Type the following command to get familiar with the type of arguments required when training a model -
+
+```python
+# make sure you are in the dir where this file is located
+python3 train_ViTCoT.py --help
+```
+
+<b>Note:</b> If you don't see a list of arguments on your terminal and encounter an error, it means that step 2 was not successful. Raise a GitHub issue and we will help you solve the issue at the earliest.
+
+### Step 3.
+
