@@ -1,4 +1,4 @@
-# Environment Setup
+# I. Environment Setup
 
 ### Step 1: Check python version. 
 Your python version should be 3.11.5 or greater to successfully install all the required libraries. If don't have access to python==3.11.5 or greater, then create a conda environment as shown in the next step. 
@@ -50,7 +50,7 @@ pip3 install -r requirements.txt
 
 <br>
 
-# Dataset Setup
+# II. Dataset Setup
 
 ### Step 1: Downloading dataset.
 To replicate our results, you only need UT Austin Egocentric Data consisting of three video datasets. Each video dataset consists of 80,000 samples of 64x64 resolution images. Download the dataset from the link provided below - 
@@ -62,7 +62,7 @@ To replicate our results, you only need UT Austin Egocentric Data consisting of 
 
 <br>
 
-# Model Training
+# III. Model Training
 
 ### Step 1.
 Enter the project directory and make sure that your virtual environment is active.
@@ -75,7 +75,7 @@ Type the following command to get familiar with the type of arguments required w
 python3 train_ViTCoT.py --help
 ```
 
-<b>Note:</b> If you don't see a list of arguments on your terminal and encounter an error, it means that step 2 was not successful. Raise a GitHub issue and we will help you solve the issue at the earliest.
+<b>Note:</b> If you don't see a list of arguments on your terminal and encounter an error, it means that 'Environment Setup' was not successful. Raise a GitHub issue and we will help you solve your issue at the earliest.
 
 ### Step 3.
 
