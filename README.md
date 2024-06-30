@@ -66,11 +66,11 @@ To replicate our results, you only need UT Austin Egocentric Data consisting of 
 
 ```
 ShapeBasedVision_HumanAdult
-└── datamodules: directory containing python code to set up the datasets and dataloaders to train.
+└── datamodules: directory containing python code to set up the datasets and dataloaders to train the model.
 │   ├── image_pairs.py - create temporal_window-based dataloader to train the model
 │   ├── transforms.py - custom data augmentation class
 │
-└── models: directory containing python code to set up the architecture for training and evaluating the model.
+└── models: directory containing python code of model architecture.
 │   ├── vit_contrastive.py - contains ViT-CoT architecture and training functions
 │
 └── notebooks: Jupyter notebook files used for creating the RDMs and bar charts.
