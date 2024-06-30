@@ -109,4 +109,13 @@ Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You
 
 <img src="./media/sh_ss.png"></img>
 
+
+<b>Note:</b> Once training starts, it is important to carefully check the terminal for display statements with '[INFO]' tags. These tags indicate important training informations that you would have passed. These tags are highlighted below in red - 
+
+<img src="./media/terminal.png"></img>
+
+<br>
+
+
+
 <b> Note To Self: </b> Test this repo on different servers!
