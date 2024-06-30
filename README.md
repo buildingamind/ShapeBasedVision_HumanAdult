@@ -116,6 +116,15 @@ Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You
 
 <br>
 
+# V. Model Evaluations
+
+After training the models using the steps shown above, we freeze the models and evaluate them using three different unsupervised methods:
+
+1. Representational Dissimilarity Matrix (RDM)
+2. Bar charts
+3. tSNEs
+
+
 
 
 <b> Note To Self: </b> Test this repo on different servers!
