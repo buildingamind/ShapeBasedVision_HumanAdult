@@ -52,7 +52,7 @@ pip3 install -r requirements.txt
 
 # II. Dataset Setup
 
-### Step 1: Downloading dataset.
+### Step 1: Downloading training dataset.
 To replicate our results, you only need UT Austin Egocentric Data consisting of three video datasets. Each video dataset consists of 80,000 samples of 64x64 resolution images. Download the dataset from the link provided below - 
 <br>
 <br>
@@ -64,6 +64,24 @@ To replicate our results, you only need UT Austin Egocentric Data consisting of 
 
 # III. Directory Organization
 
+```
+ShapeBasedVision_HumanAdult
+└── datamodules: directory containing python code to set up the datasets and dataloaders to train.
+│   ├── image_pairs.py - create temporal_window-based dataloader to train the model
+│   ├── transforms.py - custom data augmentation class
+│
+└── models: directory containing python code to set up the architecture for training and evaluating the model.
+│   ├── vit_contrastive.py - contains ViT-CoT architecture and training functions
+│
+└── notebooks: Jupyter notebook files used for creating the RDMs and bar charts.
+│   └── RDMs.ipynb
+│   └── graphs.ipynb
+│    
+└── requirements.txt: text file containing all the required libraries for this project
+└── train_ViTCoT.py: python script initializing model, dataloader, and trainer to train the model.
+└── train_ViTCoT.sh: bash script initializing arguments and to start training the model. 
+├── media: directory containing images and videos for the readme
+```
 
 <br>
 

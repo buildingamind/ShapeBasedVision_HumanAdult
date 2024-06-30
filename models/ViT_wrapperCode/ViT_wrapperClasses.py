@@ -6,9 +6,7 @@ from einops.layers.torch import Rearrange
 
 # helpers
 
-'''
-if the argument that is passed in the function is a tuple, then return else return it as a tuple
-'''
+
 def pair(t):
     return t if isinstance(t, tuple) else (t, t)
 
