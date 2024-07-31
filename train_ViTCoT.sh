@@ -1,58 +1,24 @@
 subdir=V1O1
 
-for subdir in ep0
+
+for subdir in samples
 do
     python3 train_ViTCoT.py \
         --max_epochs 100 \
         --batch_size 128 \
-        --data_dir /data/lpandey/UTAustin_EgocentricDataset/outputSamples/output_64x64_Squished/train3_80k/${subdir} \
+        --data_dir /data/lpandey/UTAustin_EgocentricDataset/outputSamples/eyeballs/paper_NatHumBeh/train_video2/eyeball1/${subdir} \
        	--seed_val 0 \
         --temporal \
         --window_size 3 \
-        --head 6 \
+        --head 1 \
         --gpus 1 \
         --val_split 0.1 \
-        --transforms transform_gB \
+        --transforms transform_resize \
         --resize_dims 64 \
         --loss_ver v0 \
-        --exp_name Eyeball_Project/paper_HumanAdults/UTAustinEgocentric/Exp2_GaussianBlurAugmentation/ViT6H/video3/
+        --exp_name dummy22/
 done
 
-for subdir in ep0
-do
-    python3 train_ViTCoT.py \
-        --max_epochs 100 \
-        --batch_size 128 \
-        --data_dir /data/lpandey/UTAustin_EgocentricDataset/outputSamples/output_64x64_Squished/train3_80k/${subdir} \
-       	--seed_val 10 \
-        --temporal \
-        --window_size 3 \
-        --head 6 \
-        --gpus 1 \
-        --val_split 0.1 \
-        --transforms transform_gB \
-        --resize_dims 64 \
-        --loss_ver v0 \
-        --exp_name Eyeball_Project/paper_HumanAdults/UTAustinEgocentric/Exp2_GaussianBlurAugmentation/ViT6H/video3/
-done
-
-for subdir in ep0
-do
-    python3 train_ViTCoT.py \
-        --max_epochs 100 \
-        --batch_size 128 \
-        --data_dir /data/lpandey/UTAustin_EgocentricDataset/outputSamples/output_64x64_Squished/train3_80k/${subdir} \
-       	--seed_val 20 \
-        --temporal \
-        --window_size 3 \
-        --head 6 \
-        --gpus 1 \
-        --val_split 0.1 \
-        --transforms transform_gB \
-        --resize_dims 64 \
-        --loss_ver v0 \
-        --exp_name Eyeball_Project/paper_HumanAdults/UTAustinEgocentric/Exp2_GaussianBlurAugmentation/ViT6H/video3/
-done
 
 
 # NOTES: 
@@ -61,12 +27,11 @@ done
 # 3. set loss ver from [v0, v1].
 # 4. if dataset_size is not specified, then all the samples from the dataset will be used for training.
 
-# extra flags:
+# Some Important Flags:
 #  --shuffle_frames \
 #  --loss_ver v0 \
 #  --shuffle_temporalWindows \
 #  --dataset_size 10000 \
 #  --dataloader_shuffle \
-
-
+#  --log_path "path_to_save_checkpoints" \
 

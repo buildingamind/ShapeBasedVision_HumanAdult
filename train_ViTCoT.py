@@ -1,7 +1,7 @@
 ## IMPORTS
 
 import sys
-sys.path.append("/home/lpandey/Baby_Research/")
+#sys.path.append("/home/lpandey/Baby_Research/")
 
 
 # Handle warnings
@@ -165,6 +165,12 @@ def create_argparser():
         default='v0',
         help="select btw CLTT loss version 0 and loss version 1. Same objectives but different implementations"
     )
+    parser.add_argument(
+        "--log_path",
+        type=str,
+        default='/data/lpandey/LOGS/VIT_Time',
+        help="the checkpoints for the trained models will be saved in this dir"
+    )
 
 
     return parser
@@ -296,7 +302,7 @@ def cli_main():
     model_checkpoint = ModelCheckpoint(save_last=True, save_top_k=1, monitor='val_loss')
     callbacks = [model_checkpoint]
 
-    logger = TensorBoardLogger("/data/lpandey/LOGS/VIT_Time", name=f"{args.exp_name}")
+    logger = TensorBoardLogger(args.log_path, name=f"{args.exp_name}")
    
 
     # single gpu training - 
