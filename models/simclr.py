@@ -84,15 +84,16 @@ class SimCLR(pl.LightningModule):
         batch_size: int,
         num_nodes: int = 1,
         arch: str = 'resnet18',
-        window_size:int = 3,
+        window_size: int = 3,
+        loss_ver: str = 'v0',
         hidden_mlp: int = 512,
         hidden_depth: int = 1,
         feat_dim: int = 128,
         warmup_epochs: int = 5,
         max_epochs: int = 100,
         temperature: float = 0.1,
-        first_conv: bool = True, # changed from True to False
-        maxpool1: bool = True, # changed from True to False
+        first_conv: bool = True, 
+        maxpool1: bool = True,
         optimizer: str = 'adam',
         lars_wrapper: bool = True,
         exclude_bn_bias: bool = False,
@@ -118,6 +119,7 @@ class SimCLR(pl.LightningModule):
         self.num_nodes = num_nodes
         self.arch = arch
         self.window_size = window_size
+        self.loss_ver = loss_ver
         self.num_samples = num_samples
         self.batch_size = batch_size
 
@@ -167,6 +169,7 @@ class SimCLR(pl.LightningModule):
 
         self.lr_schedule = np.concatenate((warmup_lr_schedule, cosine_lr_schedule))
 
+
     def init_encoder(self):
         if self.arch.startswith('resnet'):
             # Resnet34, Resnet18
@@ -206,64 +209,79 @@ class SimCLR(pl.LightningModule):
 
     def shared_step(self, batch):
 
-        # PUSH TWO IMAGES TOGETHER IN THE EMBEDDING SPACE
-        if self.window_size < 3:
-            if len(batch) == 3:
-                img1, img2, _ = batch   # returns img1, img2, index
+        # loss version v0
+        if self.loss_ver == 'v0':
+            # PUSH TWO IMAGES TOGETHER IN THE EMBEDDING SPACE
+            if self.window_size < 3:
+                if len(batch) == 3:
+                    img1, img2, _ = batch   # returns img1, img2, index
 
+                else:
+                    # final image in tuple is for online eval
+                    (img1, img2, _), _ = batch
+
+                # get h representations, bolts resnet returns a list
+                h1 = self.backbone(img1)
+                h2 = self.backbone(img2)
+
+                # get z representations
+                z1 = self.projection(h1)
+                z2 = self.projection(h2)
+
+                loss = self.nt_xent_loss(z1, z2, self.temperature)
+            
+            # PUSH MORE THAN TWO IMAGES TOGETHER IN THE EMBEDDING SPACE 
             else:
-                # final image in tuple is for online eval
-                (img1, img2, _), _ = batch
+                #print(type(batch)) --> <class 'list'>
+                #print(len(batch)) #len = 4 for window_size = 3 --> [img1, img2, img3, index]
 
-            # get h representations, bolts resnet returns a list
-            h1 = self.backbone(img1)
-            h2 = self.backbone(img2)
+                # if window_size 3
+                if len(batch) == 4:
+                    flag = 0
+                    img1, img2, img3, _ = batch # [img1, img2, img3, index]
 
-            # get z representations
-            z1 = self.projection(h1)
-            z2 = self.projection(h2)
+                # if window_size = 4
+                else:
+                    flag = 1
+                    img1, img2, img3, img4, _ = batch # [img1, img2, img3, img4, index]
+                    
+                # get h representations, bolts resnet returns a list
+                h1, h2, h3 = self.backbone(img1), self.backbone(img2), self.backbone(img3)
 
-            loss = self.nt_xent_loss(z1, z2, self.temperature)
+                    
+                if flag == 1:
+                    h4 = self.backbone(img4)
+                    z4 = self.projection(h4)
+                        
+
+                # get z representations
+                z1, z2, z3 = self.projection(h1), self.projection(h2), self.projection(h3)
+
+                # push z1 and z2 together
+                l1 = self.nt_xent_loss(z1,z2, self.temperature)
+                # push z1 and z3 together
+                l2 = self.nt_xent_loss(z1,z3, self.temperature)
+                if flag == 1:
+                    l3 = self.nt_xent_loss(z1,z4, self.temperature)
+                        
+                    # gather losses - 
+                    loss = (l1+l2+l3)
+                else:
+                    # gather losses - 
+                    loss = (l1+l2)
         
-        # PUSH MORE THAN TWO IMAGES TOGETHER IN THE EMBEDDING SPACE 
+         # loss version v1
         else:
-            #print(type(batch)) --> <class 'list'>
-            #print(len(batch)) #len = 4 for window_size = 3 --> [img1, img2, img3, index]
+            # window_size 3
+            img1, img2, img3, _ = batch
 
-            # if window_size 3
-            if len(batch) == 4:
-                flag = 0
-                img1, img2, img3, _ = batch # [img1, img2, img3, index]
-
-            # if window_size = 4
-            else:
-                flag = 1
-                img1, img2, img3, img4, _ = batch # [img1, img2, img3, img4, index]
-                
             # get h representations, bolts resnet returns a list
             h1, h2, h3 = self.backbone(img1), self.backbone(img2), self.backbone(img3)
-
-                
-            if flag == 1:
-                h4 = self.backbone(img4)
-                z4 = self.projection(h4)
-                    
 
             # get z representations
             z1, z2, z3 = self.projection(h1), self.projection(h2), self.projection(h3)
 
-            # push z1 and z2 together
-            l1 = self.nt_xent_loss(z1,z2, self.temperature)
-            # push z1 and z3 together
-            l2 = self.nt_xent_loss(z1,z3, self.temperature)
-            if flag == 1:
-                l3 = self.nt_xent_loss(z1,z4, self.temperature)
-                    
-                # gather losses - 
-                loss = (l1+l2+l3)
-            else:
-                # gather losses - 
-                loss = (l1+l2)
+            loss = self.nt_xent_loss_triplet(z1, z2, z3, self.temperature)
 
         return loss
 
@@ -345,6 +363,8 @@ class SimCLR(pl.LightningModule):
             optimizer = LightningOptimizer.to_lightning_optimizer(optimizer, self.trainer)
         optimizer.step(closure=optimizer_closure)
 
+
+    # Loss version 0 implementation
     def nt_xent_loss(self, out_1, out_2, temperature, eps=1e-6):
         """
             assume out_1 and out_2 are normalized
@@ -391,6 +411,54 @@ class SimCLR(pl.LightningModule):
         loss = -torch.log(pos / (neg + eps)).mean() # num/den
 
         return loss
+    
+    # Loss version 1 implementation
+    def nt_xent_loss_triplet(self, out_1, out_2, out_3, temperature, eps=1e-6):
+        """
+        Normalized Temperature-scaled Cross Entropy (NT-Xent) loss for triplets of samples.
+        
+        Args:
+        - out_1: Tensor of shape [batch_size, dim], first sample representations
+        - out_2: Tensor of shape [batch_size, dim], second sample representations
+        - out_3: Tensor of shape [batch_size, dim], third sample representations
+        - temperature: Floating point value, temperature scaling factor
+        - eps: Small value for numerical stability
+        
+        Returns:
+        - loss: NT-Xent loss value
+        """
+        # Gather representations in case of distributed training (assuming no distributed training here)
+        out_1_dist = out_1
+        out_2_dist = out_2
+        out_3_dist = out_3
+        
+        # Concatenate all samples into a single tensor
+        out_all = torch.cat([out_1, out_2, out_3], dim=0)
+        out_all_dist = torch.cat([out_1_dist, out_2_dist, out_3_dist], dim=0)
+        
+        # Calculate covariance and similarity
+        cov = torch.mm(out_all, out_all_dist.t().contiguous())
+        sim = torch.exp(cov / temperature)
+        
+        # Negative similarity (excluding self-similarity)
+        neg = sim.sum(dim=-1)
+        row_sub = torch.Tensor(neg.shape).fill_(math.e).to(neg.device)
+        neg = torch.clamp(neg - row_sub, min=eps)  # clamp for numerical stability
+        
+        # Positive similarities (within the triplet)
+        pos_ab = torch.exp(torch.sum(out_1 * out_2, dim=-1) / temperature)
+        pos_ac = torch.exp(torch.sum(out_1 * out_3, dim=-1) / temperature)
+        pos_bc = torch.exp(torch.sum(out_2 * out_3, dim=-1) / temperature)
+        
+        # Combine positive similarities
+        pos = torch.cat([pos_ab, pos_ac, pos_bc], dim=0)
+        
+        # Calculate NT-Xent loss
+        loss = -torch.log(pos / (neg + eps)).mean()
+        
+        return loss
+
+
 
     @staticmethod
     def add_model_specific_args(parent_parser):

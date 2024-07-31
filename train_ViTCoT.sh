@@ -14,6 +14,7 @@ do
         --val_split 0.1 \
         --transforms transform_gB \
         --resize_dims 64 \
+        --loss_ver v0 \
         --exp_name Eyeball_Project/paper_HumanAdults/UTAustinEgocentric/Exp2_GaussianBlurAugmentation/ViT6H/video3/
 done
 
@@ -31,6 +32,7 @@ do
         --val_split 0.1 \
         --transforms transform_gB \
         --resize_dims 64 \
+        --loss_ver v0 \
         --exp_name Eyeball_Project/paper_HumanAdults/UTAustinEgocentric/Exp2_GaussianBlurAugmentation/ViT6H/video3/
 done
 
@@ -48,16 +50,20 @@ do
         --val_split 0.1 \
         --transforms transform_gB \
         --resize_dims 64 \
+        --loss_ver v0 \
         --exp_name Eyeball_Project/paper_HumanAdults/UTAustinEgocentric/Exp2_GaussianBlurAugmentation/ViT6H/video3/
 done
 
 
 # NOTES: 
 # 1. set the batch size to 128 if single GPU training, else calculate the effective batch size based on num_of_gpus used in distributed training.
-# 2. set window_size in the range [1,4]
+# 2. set window_size in the range [1,4].
+# 3. set loss ver from [v0, v1].
+# 4. if dataset_size is not specified, then all the samples from the dataset will be used for training.
 
 # extra flags:
 #  --shuffle_frames \
+#  --loss_ver v0 \
 #  --shuffle_temporalWindows \
 #  --dataset_size 10000 \
 #  --dataloader_shuffle \

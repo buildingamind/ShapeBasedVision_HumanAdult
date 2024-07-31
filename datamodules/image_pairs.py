@@ -258,13 +258,13 @@ class ImagePairsDataModule(pl.LightningDataModule):
         if self.gpus > 1:
             print("[INFO] Creating a Custom Sampler for Dataloader in DDP")
             sampler = torch.utils.data.distributed.DistributedSampler(
-                self.train_dataset, shuffle=False
+                self.train_dataset, shuffle=self.dataloader_shuffle
             )
         
         return DataLoader(
             self.train_dataset,
             batch_size=self.batch_size,
-            shuffle=self.dataloader_shuffle,
+            shuffle=self.dataloader_shuffle if self.gpus<1 else False,
             num_workers=self.num_workers,
             pin_memory=self.pin_memory,
             drop_last=self.drop_last,

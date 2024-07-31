@@ -158,6 +158,13 @@ def create_argparser():
         default=64,
         help="resize the image to a desired resolution if transform_resize is selected"
     )
+    parser.add_argument(
+        "--loss_ver",
+        type=str,
+        choices=['v0','v1'],
+        default='v0',
+        help="select btw CLTT loss version 0 and loss version 1. Same objectives but different implementations"
+    )
 
 
     return parser
@@ -190,7 +197,7 @@ def cli_main():
 
     # setup model 
     backbone = Backbone('vit', configuration)
-    model = LitClassifier(backbone=backbone, window_size=args.window_size)
+    model = LitClassifier(backbone=backbone, window_size=args.window_size, loss_ver=args.loss_ver)
 
     # experimental
     if args.transforms == 'transform_gB':
@@ -281,7 +288,9 @@ def cli_main():
 
     print("[INFO] Train dataloader shuffle set to :: ", dm.dataloader_shuffle)
 
-    print("[TEST] passing through transformations - {}".format(dm.transform))
+    print("[INFO] Passing through transformations :: {}".format(dm.transform))
+
+    print("[INFO] Loss function version :: {}".format(model.loss_ver))
 
 
     model_checkpoint = ModelCheckpoint(save_last=True, save_top_k=1, monitor='val_loss')
