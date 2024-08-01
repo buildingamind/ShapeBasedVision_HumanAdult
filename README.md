@@ -118,13 +118,19 @@ Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You
 
 # V. Model Evaluations
 
-After training the models using the steps shown above, we freeze the models and evaluate them using three different unsupervised methods:
+After training the models using the steps shown above, we freeze the models and evaluate their feature space. For testing these models, download this dataset - 
+<br>
+<br>
+<a href="www.google.com">Dataset</a>
 
-1. Representational Dissimilarity Matrix (RDM)
-2. Bar charts
-3. tSNEs
+<b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
 
+<br>
+<br>
 
+We provide three different scripts inside the 'notebooks' directory to evaluate the models - 
 
+1. Representational Dissimilarity Matrix (RDM) : Use RDMs.ipynb jupyter notebook
 
-<b> Note To Self: </b> Test this repo on different servers!
+2. Bar charts : Use graphs.ipynb jupyter notebook
+3. tSNEs : Use tsne.ipynb jupyter notebook
