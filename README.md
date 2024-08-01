@@ -125,8 +125,6 @@ After training the models using the steps shown above, we freeze the models and 
 
 <b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
 
-<br>
-<br>
 
 We provide three different scripts inside the 'notebooks' directory to evaluate the models - 
 
