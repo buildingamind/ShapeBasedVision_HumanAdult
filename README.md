@@ -126,9 +126,11 @@ After training the models using the steps shown above, we freeze the models and 
 <b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
 
 
-We provide three different scripts inside the 'notebooks' directory to evaluate the models - 
+We provide three different scripts inside the 'notebooks' directory to evaluate the models: 
 
-1. Representational Dissimilarity Matrix (RDM) : Use RDMs.ipynb jupyter notebook
+1. RDMs.ipynb  - This jupyter notebook plots the raw features from the encoder in the form of a matrix. 
 
-2. Bar charts : Use graphs.ipynb jupyter notebook
-3. tSNEs : Use tsne.ipynb jupyter notebook
+2. graphs.ipynb - This jupyter notebook is used to plot the shape/color sensitivity scores and std_error from the RDM generated using the above script.
+
+3. tsne.ipynb - This jupyter notebook plots the 2D representation of the encoder's feature space
+
