@@ -6,7 +6,7 @@ Your python version should be 3.11.5 or greater to successfully install all the 
 To check your python version - 
 
 ```python
-python3 --version s
+python3 --version
 ```
 
 ### Step 2: Creating a virtual Environment.
@@ -99,7 +99,7 @@ Type the following command to get familiar with the type of arguments required w
 python3 train_ViTCoT.py --help
 ```
 
-<b>Note:</b> If you don't see a list of arguments on your terminal and encounter an error, it means that 'Environment Setup' was not successful. Raise a GitHub issue and we will help you solve your issue at the earliest.
+<b>Note:</b> If you don't see a list of arguments on your terminal and encounter an error, it means that 'Environment Setup' was not successful.
 
 ### Step 3.
 
@@ -121,7 +121,7 @@ Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You
 After training the models using the steps shown above, we freeze the models and evaluate their feature space. For testing these models, download this dataset - 
 <br>
 <br>
-<a href="www.google.com">Dataset</a>
+<a href="[www.google.com](https://indiana-my.sharepoint.com/:u:/g/personal/lpandey_iu_edu/EQ72pxIdZnhLu3t0eKPUB_sBIR8v9sP3XYLWl5kYhvDnVA?e=JkwPJT)">Training Dataset</a>
 
 <b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
 

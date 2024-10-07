@@ -93,24 +93,24 @@ def create_argparser():
     parser.add_argument(
         "--shuffle_frames",
         action="store_true",
-        help="shuffle temporal images for training"
+        help="shuffle images inside the temporal window. ex - [img_1, img_999, img_1456]"
     )
     parser.add_argument(
         "--shuffle_temporalWindows",
         action="store_true",
-        help="shuffle temporal images for training"
+        help="shuffle the order of temporal windows. ex - [img_1, img_2, img_3], [img_701, img_702, img_703]"
     )
     parser.add_argument(
         "--dataloader_shuffle",
         action="store_true",
-        help="shuffle temporal images for training"
+        help="shuffle the dataset after every epoch. Only recommended if shuffle_frames or shuffle_temporalWindows is set to True"
     )
     parser.add_argument(
         "--head",
         type=int,
         choices=[1,3,6,9,12],
         default=1,
-        help="number of attention heads"
+        help="number of attention heads and transformer layers"
     )
     parser.add_argument(
         "--batch_size",
@@ -163,7 +163,7 @@ def create_argparser():
         type=str,
         choices=['v0','v1'],
         default='v0',
-        help="select btw CLTT loss version 0 and loss version 1. Same objectives but different implementations"
+        help="select CLTT loss version. Use v0 to replicate the paper results"
     )
     parser.add_argument(
         "--log_path",
