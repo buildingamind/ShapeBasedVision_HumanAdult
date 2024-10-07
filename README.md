@@ -6,7 +6,7 @@ Your python version should be 3.11.5 or greater to successfully install all the 
 To check your python version - 
 
 ```python
-python3 --version
+python3 --version s
 ```
 
 ### Step 2: Creating a virtual Environment.
