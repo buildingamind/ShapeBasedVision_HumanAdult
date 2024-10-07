@@ -163,7 +163,7 @@ def create_argparser():
         type=str,
         choices=['v0','v1'],
         default='v0',
-        help="select CLTT loss version. Use v0 to replicate the paper results"
+        help="select CLTT loss version. Recommended: use v0 to replicate the paper results"
     )
     parser.add_argument(
         "--log_path",

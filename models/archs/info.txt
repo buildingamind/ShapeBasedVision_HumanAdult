@@ -1,0 +1,3 @@
+Note: 
+1. This dir contains the architectures for custom resnet models.
+2. Only resnet_2b.py was used in the experiments. However, you can initialize different architecture sizes and test them.

@@ -58,7 +58,7 @@ To replicate our results, you only need UT Austin Egocentric Data consisting of 
 <br>
 <a href="https://indiana-my.sharepoint.com/:u:/g/personal/lpandey_iu_edu/EQ72pxIdZnhLu3t0eKPUB_sBIR8v9sP3XYLWl5kYhvDnVA?e=KbOyI8">Train Dataset</a>
 
-<b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
+<b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you.
 
 <br>
 
@@ -99,8 +99,7 @@ Type the following command to get familiar with the type of arguments required w
 python3 train_ViTCoT.py --help
 ```
 
-<b>Note:</b> If you don't see a list of arguments on your terminal and encounter an error, it means that 'Environment Setup' was not successful.
-
+<b>Note:</b> If you don't see a list of arguments on your terminal and encounter an error, it means that 'Environment Setup' was not successful. Raise a GitHub issue and we will help you solve your issue at our earliest availability.
 ### Step 3.
 
 Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You can change the number of GPUs, temporal window size, architecture size, experiment name, shuffling and many other arguments in this file before training the model.
@@ -121,7 +120,7 @@ Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You
 After training the models using the steps shown above, we freeze the models and evaluate their feature space. For testing these models, download this dataset - 
 <br>
 <br>
-<a href="www.google.com">Dataset</a>
+<a href="https://indiana-my.sharepoint.com/:u:/g/personal/lpandey_iu_edu/ERRtraT4TQNJuLiiuypUJ2wBGzebUJ3qfPWUE4Y929FXuQ?e=1t65Ak">Test Dataset</a>
 
 <b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
 
