@@ -56,7 +56,7 @@ pip3 install -r requirements.txt
 To replicate our results, you only need UT Austin Egocentric Data consisting of three video datasets. Each video dataset consists of 80,000 samples of 64x64 resolution images. Download the dataset from the link provided below - 
 <br>
 <br>
-<a href="www.google.com">Dataset</a>
+<a href="https://indiana-my.sharepoint.com/:u:/g/personal/lpandey_iu_edu/EQ72pxIdZnhLu3t0eKPUB_sBIR8v9sP3XYLWl5kYhvDnVA?e=KbOyI8">Train Dataset</a>
 
 <b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
 
@@ -121,7 +121,7 @@ Open and modify <b>train_ViTCoT.sh</b> as per the choice of your experiment. You
 After training the models using the steps shown above, we freeze the models and evaluate their feature space. For testing these models, download this dataset - 
 <br>
 <br>
-<a href="www.google.com](https://indiana-my.sharepoint.com/:u:/g/personal/lpandey_iu_edu/EQ72pxIdZnhLu3t0eKPUB_sBIR8v9sP3XYLWl5kYhvDnVA?e=JkwPJT)">Training Dataset</a>
+<a href="www.google.com">Dataset</a>
 
 <b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
 
