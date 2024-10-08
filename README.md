@@ -153,3 +153,14 @@ jupyter notebook --port=16008 --no-browser
 Copy the URL from the terminal window as shown in the screenshot below and run it on the browser - 
 
 <img src="./media/notebook_url.png"></img>
+
+### Step 4. 
+Follow the steps given in the notebooks to create RDMs, t-SNEs, and graphs as shown in the paper.
+
+# VI. Citation
+
+If you use our code, consider referencing our paper - 
+
+```
+In Progress!!!
+```
