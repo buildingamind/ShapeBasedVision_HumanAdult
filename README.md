@@ -122,7 +122,7 @@ After training the models using the steps shown above, we freeze the models and 
 <br>
 <a href="https://indiana-my.sharepoint.com/:u:/g/personal/lpandey_iu_edu/ERRtraT4TQNJuLiiuypUJ2wBGzebUJ3qfPWUE4Y929FXuQ?e=1t65Ak">Test Dataset</a>
 
-<b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you at the earliest.
+<b>Note: </b>If you don't have access to the dataset, email: lpandey@iu.edu and access will be given to you.
 
 
 We provide three different scripts inside the 'notebooks' directory to evaluate the models: 
@@ -133,3 +133,23 @@ We provide three different scripts inside the 'notebooks' directory to evaluate 
 
 3. tsne.ipynb - This jupyter notebook plots the 2D representation of the encoder's feature space
 
+### Step 1.
+Assuming that you want to run the jupyter notebooks on a linux server, open terminal and enter - 
+
+```python3
+ssh -L 16008:127.0.0.1:16008 lpandey@<server_name>.luddy.indiana.edu
+```
+
+### Step 2.
+After successful login, NAVIGATE TO THE PROJECT DIRECTORY and enter - 
+
+```python3
+jupyter notebook --port=16008 --no-browser
+```
+
+<b>Note:</b> The port number should match with the port number in step 1.
+
+### Step 3. 
+Copy the URL from the terminal window as shown in the screenshot below and run it on the browser - 
+
+<img src="./media/notebook_url.png"></img>
